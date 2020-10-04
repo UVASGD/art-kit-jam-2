@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4744676871777473082}
   - component: {fileID: 4306058529232865025}
   - component: {fileID: 8826740624371430307}
+  - component: {fileID: 1947994260250051573}
   m_Layer: 10
   m_Name: TowerArrow
   m_TagString: Untagged
@@ -62,6 +63,21 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.06960186, y: 0.06960186, z: 0.72600937}
   m_Center: {x: 0, y: 0, z: -0.0053958893}
+--- !u!114 &1947994260250051573
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7346575980528285444}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73cd280c3dd48dc41a2489f5177ebaca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_state: 0
+  m_damage: 0
+  m_src: {fileID: 0}
 --- !u!1001 &2607568581532015455
 PrefabInstance:
   m_ObjectHideFlags: 0
