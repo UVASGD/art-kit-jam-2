@@ -12,16 +12,22 @@ public class TowerArrowScript : MonoBehaviour
     public float m_damage;
     public GameObject m_src; // the entity who fired me
 
+    private float m_spawnTime;
+    private float m_despawnTime = 5.0f;
+
     // Start is called before the first frame update
     void Start()
     {
         m_state = ArrowState.FLYING;
+        m_spawnTime = Time.time;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (Time.time - m_spawnTime > m_despawnTime) {
+            Destroy(gameObject);
+        }
     }
 
     void OnCollisionEnter(Collision collision) {
@@ -33,7 +39,7 @@ public class TowerArrowScript : MonoBehaviour
             }
 
             m_state = ArrowState.HIT;
+            m_spawnTime = Time.time;
         }
-        
     }
 }

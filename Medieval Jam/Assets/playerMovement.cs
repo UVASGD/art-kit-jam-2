@@ -15,10 +15,12 @@ public class playerMovement : MonoBehaviour
     public float jumpHeight = 5.0f;
 
     bool isGrounded;
+    private FactionManager factionManager;
     // Start is called before the first frame update
     void Start()
     {
-        
+        FactionManager factionManager = FactionManager.GetInstance(this.gameObject);
+        factionManager.RegisterPlayerObject(this.gameObject);
     }
 
     // Update is called once per frame
