@@ -7,6 +7,7 @@ public class FactionManager : MonoBehaviour
     public List<GameObject> players {get; private set;}
     // Start is called before the first frame update
 
+    // Get the instance of the FactionManager present in your scene.
     public static FactionManager GetInstance(GameObject you) {
         GameObject[] objs = you.scene.GetRootGameObjects();
         foreach (GameObject obj in objs) {
@@ -21,7 +22,7 @@ public class FactionManager : MonoBehaviour
     void Awake() {
         players = new List<GameObject>();
     }
-    
+
     void Start()
     {
         
