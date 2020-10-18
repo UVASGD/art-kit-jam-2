@@ -5,6 +5,7 @@ using UnityEngine;
 public class playerMovement : MonoBehaviour
 {
     public CharacterController controller;
+    public Animator animations;
 
     public float speed = 12f;
     public float gravity = -9.81f;
@@ -16,11 +17,13 @@ public class playerMovement : MonoBehaviour
 
     bool isGrounded;
     private FactionManager factionManager;
+
+    private bool mouseDown = false;
     // Start is called before the first frame update
     void Start()
     {
-        FactionManager factionManager = FactionManager.GetInstance(this.gameObject);
-        factionManager.RegisterPlayerObject(this.gameObject);
+        //FactionManager factionManager = FactionManager.GetInstance(this.gameObject);              //I commented this out bc it was set to null in the prefab
+        //factionManager.RegisterPlayerObject(this.gameObject);                                     //just uncomment when you implement it I guess
     }
 
     // Update is called once per frame
@@ -29,19 +32,33 @@ public class playerMovement : MonoBehaviour
         isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
         if(isGrounded && velocity.y < 0)
         {
-            velocity.y = -2f;
+            velocity.y = -2f;               
         }
 
-        float x = Input.GetAxis("Horizontal");
+        float x = Input.GetAxis("Horizontal");              //input
         float z = Input.GetAxis("Vertical");
 
-        Vector3 move = transform.right * x + transform.forward * z;
+        Vector3 move = transform.right * x + transform.forward * z;     
 
-        controller.Move(move*speed*Time.deltaTime);
+        controller.Move(move*speed*Time.deltaTime);         //movement
 
         if (Input.GetButtonDown("Jump") && isGrounded)
         {
-            velocity.y = Mathf.Sqrt(jumpHeight *-2f*gravity);
+            velocity.y = Mathf.Sqrt(jumpHeight *-2f*gravity);       //jump
+        }
+
+        animations.SetFloat("speed", Mathf.Sqrt((float)(x * x) + (float)(z * z)));      //code to check update the animator on the speed: in the animator, if speed > 0.1, 
+                                                                                        //it'll start playing the walking animation
+
+        if (Input.GetMouseButtonDown(0)&&!mouseDown)    
+        {
+            mouseDown = true;
+            animations.SetTrigger("Attack");        //code to trigger an attack animation
+        }
+
+        if (Input.GetMouseButtonUp(0))
+        {
+            mouseDown = false;
         }
 
         velocity.y += gravity;
